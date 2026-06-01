@@ -48,6 +48,7 @@ body {
   color: var(--text);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 a { color: var(--blue); text-decoration: none; }
@@ -71,6 +72,7 @@ a:hover { text-decoration: underline; }
   top: 0;
   height: 100vh;
   overflow-y: auto;
+  z-index: 200;
 }
 
 .sidebar-brand {
@@ -187,6 +189,7 @@ a:hover { text-decoration: underline; }
   min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .topbar {
@@ -207,6 +210,10 @@ a:hover { text-decoration: underline; }
 .topbar-title {
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
   color: var(--text);
 }
 
@@ -901,6 +908,29 @@ select:focus { border-color: var(--blue); }
     height: 44px;
     padding: 0 16px;
     width: 100%;
+    gap: 8px;
+  }
+
+  .topbar-title {
+    font-size: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .topbar-badges {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .topbar-badges .badge {
+    padding: 0 5px;
+    font-size: 10px;
+    height: 18px;
+    line-height: 18px;
+  }
+
+  .topbar-badges .badge:last-child {
+    display: none;
   }
 
   .content {
@@ -933,10 +963,10 @@ select:focus { border-color: var(--blue); }
     overflow-x: auto;
   }
 
-  #threats table th:nth-child(5),
-  #threats table td:nth-child(5),
-  #threats table th:nth-child(7),
-  #threats table td:nth-child(7) {
+  thead tr th:nth-child(5),
+  tbody tr td:nth-child(5),
+  thead tr th:nth-child(7),
+  tbody tr td:nth-child(7) {
     display: none;
   }
 
@@ -961,12 +991,14 @@ select:focus { border-color: var(--blue); }
   .rec-title {
     font-size: 12px;
     word-break: break-word;
+    margin-bottom: 4px;
   }
 
   .rec-meta-right {
     margin-left: 0;
     font-size: 10px;
     width: 100%;
+    justify-content: flex-start;
   }
 
   .rec-layer {
