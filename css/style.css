@@ -34,7 +34,12 @@
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 body {
   font-family: var(--font);
@@ -858,8 +863,15 @@ select:focus { border-color: var(--blue); }
 
 /* Mobile Breakpoint (768px and below) */
 @media (max-width: 768px) {
-  body {
+  html, body {
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
+  }
+
+  .layout {
+    width: 100%;
+    position: relative;
   }
 
   .sidebar {
@@ -877,6 +889,10 @@ select:focus { border-color: var(--blue); }
     left: 0;
   }
 
+  .main {
+    width: 100%;
+  }
+
   .hamburger-btn {
     display: flex;
   }
@@ -884,10 +900,12 @@ select:focus { border-color: var(--blue); }
   .topbar {
     height: 44px;
     padding: 0 16px;
+    width: 100%;
   }
 
   .content {
     padding: 16px;
+    width: 100%;
   }
 
   .section-title {
