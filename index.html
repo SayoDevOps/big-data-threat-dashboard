@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Big Data Threat Modelling &amp; Risk Assessment Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js" defer></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" role="navigation" aria-label="Main navigation">
+
+      <div class="sidebar-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <div class="brand-name">Threat Dashboard</div>
+          <div class="brand-sub">Big Data Security</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">Dashboard</div>
+
+        <a href="#" class="nav-link" data-section="overview">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Overview
+        </a>
+
+        <a href="#" class="nav-link" data-section="threats">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Threat Matrix
+        </a>
+
+        <a href="#" class="nav-link" data-section="sixvs">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          6Vs Analysis
+        </a>
+
+        <a href="#" class="nav-link" data-section="cia">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          CIA Triad
+        </a>
+
+        <a href="#" class="nav-link" data-section="recommendations">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Recommendations
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        Group 1 &mdash; Big Data Security<br/>
+        6Vs Framework &times; CIA Triad<br/>
+        28 threats &middot; 5 ecosystem layers
+      </div>
+
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+
+      <header class="topbar">
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Open sidebar menu">
+          <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <span class="topbar-title">Big Data Threat Modelling &amp; Risk Assessment</span>
+        <div class="topbar-badges">
+          <span class="badge badge-danger">6 Critical</span>
+          <span class="badge badge-warning">11 High</span>
+          <span class="badge badge-gray">28 Total threats</span>
+        </div>
+      </header>
+
+      <main class="content">
+
+        <!-- Overview -->
+        <section id="overview" class="section">
+          <h1 class="section-title">Overview</h1>
+          <p class="section-desc">High-level security posture summary across the Big Data ecosystem using the 6Vs framework and CIA Triad classification.</p>
+
+          <!-- Stat cards -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="stat-label">Total threats</div>
+              <div class="stat-value info" id="stat-total">28</div>
+              <div class="stat-sub">Across 5 layers</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Critical severity</div>
+              <div class="stat-value danger" id="stat-critical">—</div>
+              <div class="stat-sub">Immediate action</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">High severity</div>
+              <div class="stat-value warning" id="stat-high">—</div>
+              <div class="stat-sub">Within 30 days</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Avg risk score</div>
+              <div class="stat-value" id="stat-risk">—</div>
+              <div class="stat-sub">Likelihood × Impact</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">6Vs risk index</div>
+              <div class="stat-value danger" id="stat-vs">—</div>
+              <div class="stat-sub">Value dimension: 94</div>
+            </div>
+          </div>
+
+          <!-- Charts row -->
+          <div class="charts-grid">
+            <div class="card">
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                Average risk score by layer
+              </div>
+              <div class="chart-wrap">
+                <canvas id="layerRiskChart"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                Severity distribution
+              </div>
+              <div class="chart-wrap">
+                <canvas id="severityDonut"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- CIA bar chart -->
+          <div class="card">
+            <div class="card-title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              CIA triad threat coverage
+            </div>
+            <div class="chart-wrap" style="height: 160px;">
+              <canvas id="ciaBarChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Layer summary table -->
+          <div class="card">
+            <div class="card-title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+              Layer-by-layer breakdown
+            </div>
+            <table class="layer-table">
+              <thead>
+                <tr>
+                  <th>Layer</th>
+                  <th>Threats</th>
+                  <th>Avg risk score</th>
+                  <th>Critical</th>
+                  <th>High</th>
+                </tr>
+              </thead>
+              <tbody id="layer-summary-body"></tbody>
+            </table>
+          </div>
+
+        </section>
+
+
+        <!-- Threat Matrix -->
+        <section id="threats" class="section">
+          <h1 class="section-title">Threat Matrix</h1>
+          <p class="section-desc">All 28 identified threats across the Big Data ecosystem. Risk score = Likelihood (1–5) × Impact (1–5). Click any row to expand the full description and controls.</p>
+
+          <div class="info-note">Click any row to see the full threat description, recommended controls, and MITRE ATT&amp;CK reference.</div>
+
+          <!-- Filters -->
+          <div class="filter-row">
+            <label for="filter-layer">Layer</label>
+            <select id="filter-layer">
+              <option value="All">All layers</option>
+              <option>Ingestion</option>
+              <option>Storage</option>
+              <option>Processing</option>
+              <option>Analysis</option>
+              <option>Serving</option>
+            </select>
+
+            <label for="filter-sev">Severity</label>
+            <select id="filter-sev">
+              <option value="All">All severities</option>
+              <option>Critical</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select>
+
+            <label for="filter-cia">CIA pillar</label>
+            <select id="filter-cia">
+              <option value="All">All</option>
+              <option>Confidentiality</option>
+              <option>Integrity</option>
+              <option>Availability</option>
+            </select>
+
+            <span class="filter-count" id="filter-count"></span>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Layer</th>
+                  <th>Threat</th>
+                  <th>CIA</th>
+                  <th>6Vs</th>
+                  <th>Severity</th>
+                  <th>Risk score</th>
+                </tr>
+              </thead>
+              <tbody id="threat-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+
+        <!-- 6Vs Analysis -->
+        <section id="sixvs" class="section">
+          <h1 class="section-title">6Vs Analysis</h1>
+          <p class="section-desc">Security risk assessment mapped to each of the six Big Data dimensions. Score reflects the aggregate threat exposure introduced by each dimension.</p>
+
+          <div class="charts-grid">
+            <div class="card">
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 19.07 6.5 19.07 15.5 12 20 4.93 15.5 4.93 6.5 12 2"/></svg>
+                Risk radar
+              </div>
+              <div class="chart-wrap" style="height: 260px;">
+                <canvas id="radarChart"></canvas>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                Dimension scores
+              </div>
+              <div id="sixvs-bars-inline">
+              </div>
+            </div>
+          </div>
+          <div id="sixvs-cards" class="vs-grid"></div>
+        </section>
+
+
+        <!-- CIA Triad -->
+        <section id="cia" class="section">
+          <h1 class="section-title">CIA Triad</h1>
+          <p class="section-desc">All threats classified against the three pillars of the CIA Triad: Confidentiality, Integrity, and Availability.</p>
+
+          <div id="cia-cards" class="cia-grid"></div>
+
+          <div class="card">
+            <div class="card-title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              CIA exposure per ecosystem layer
+            </div>
+            <div class="chart-wrap" style="height: 240px;">
+              <canvas id="ciaLayerChart"></canvas>
+            </div>
+          </div>
+
+        </section>
+
+
+        <!-- Recommendations -->
+        <section id="recommendations" class="section">
+          <h1 class="section-title">Security Recommendations</h1>
+          <p class="section-desc">Prioritised controls mapped to identified threats. P1 = within 7 days, P2 = within 30 days, P3 = within 90 days.</p>
+
+          <div id="rec-list"></div>
+
+          <!-- Implementation roadmap -->
+          <div class="card">
+            <div class="card-title">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Implementation roadmap
+            </div>
+            <div class="roadmap-grid">
+              <div class="roadmap-phase">
+                <div class="roadmap-phase-title danger">Phase 1 &mdash; 0 to 7 days</div>
+                <div class="roadmap-item">Encrypt data at rest and in transit</div>
+                <div class="roadmap-item">Audit and lock all cloud storage ACLs</div>
+                <div class="roadmap-item">Enforce broker and API authentication</div>
+                <div class="roadmap-item">Implement RBAC across all layers</div>
+              </div>
+              <div class="roadmap-phase">
+                <div class="roadmap-phase-title warning">Phase 2 &mdash; 8 to 30 days</div>
+                <div class="roadmap-item">Deploy data provenance and lineage tracking</div>
+                <div class="roadmap-item">Apply differential privacy to analytics outputs</div>
+                <div class="roadmap-item">Enable centralised audit logging and SIEM</div>
+                <div class="roadmap-item">Harden ML training pipeline</div>
+              </div>
+              <div class="roadmap-phase">
+                <div class="roadmap-phase-title info">Phase 3 &mdash; 31 to 90 days</div>
+                <div class="roadmap-item">API response filtering and DLP controls</div>
+                <div class="roadmap-item">Runtime anomaly detection on cluster</div>
+                <div class="roadmap-item">Red team and penetration testing</div>
+                <div class="roadmap-item">Security awareness training programme</div>
+              </div>
+            </div>
+          </div>
+
+        </section>
+        <!-- recommendations -->
+
+      </main>
+    </div>
+    <!-- /main -->
+
+  </div>
+  <!-- layout -->
+
+  <script src="js/data.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Sidebar overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+</body>
+</html>
