@@ -64,34 +64,6 @@ function vTags(vsArray) {
 }
 
 
-//  Mobile nav toggle 
-function bindMobileNav() {
-  const toggle  = el("nav-toggle");
-  const sidebar = qs(".sidebar");
-  const overlay = el("sidebar-overlay");
-
-  if (!toggle || !sidebar || !overlay) return;
-
-  toggle.addEventListener("click", () => {
-    sidebar.classList.toggle("open");
-    overlay.classList.toggle("visible");
-  });
-
-  overlay.addEventListener("click", () => {
-    sidebar.classList.remove("open");
-    overlay.classList.remove("visible");
-  });
-
-  // Close sidebar when a nav link is clicked on mobile
-  qsa(".nav-link").forEach(link => {
-    link.addEventListener("click", () => {
-      if (window.innerWidth <= 780) {
-        sidebar.classList.remove("open");
-        overlay.classList.remove("visible");
-      }
-    });
-  });
-}
 
 
 //  Section navigation
@@ -428,7 +400,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   bindNav();
   bindFilters();
-  bindMobileNav();
 
   renderOverviewStats();
   renderThreatTable();
