@@ -329,11 +329,13 @@ a:hover { text-decoration: underline; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 6px;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .layer-table {
   width: 100%;
+  min-width: 520px;
 }
 
 table {
