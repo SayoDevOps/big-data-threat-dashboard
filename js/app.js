@@ -416,14 +416,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (hamburgerBtn && sidebarEl && overlayEl) {
     hamburgerBtn.addEventListener("click", () => {
-      sidebarEl.classList.toggle("open");
-      overlayEl.classList.toggle("active");
+      const isOpen = sidebarEl.classList.toggle("open");
+      overlayEl.classList.toggle("active", isOpen);
+      hamburgerBtn.classList.toggle("active", isOpen);
+      hamburgerBtn.setAttribute("aria-label", isOpen ? "Close sidebar menu" : "Open sidebar menu");
     });
 
     // Close sidebar on overlay click
     overlayEl.addEventListener("click", () => {
       sidebarEl.classList.remove("open");
       overlayEl.classList.remove("active");
+      hamburgerBtn.classList.remove("active");
+      hamburgerBtn.setAttribute("aria-label", "Open sidebar menu");
     });
 
     // Close sidebar when clicking any nav link
@@ -431,6 +435,8 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", () => {
         sidebarEl.classList.remove("open");
         overlayEl.classList.remove("active");
+        hamburgerBtn.classList.remove("active");
+        hamburgerBtn.setAttribute("aria-label", "Open sidebar menu");
       });
     });
   }

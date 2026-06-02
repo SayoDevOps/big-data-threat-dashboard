@@ -827,6 +827,7 @@ select:focus { border-color: var(--blue); }
   align-items: center;
   justify-content: center;
   border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
 .hamburger-btn:hover {
@@ -835,6 +836,25 @@ select:focus { border-color: var(--blue); }
 
 .hamburger-btn svg {
   display: block;
+  width: 20px;
+  height: 20px;
+}
+
+.hamburger-btn svg line {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.hamburger-btn.active svg line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburger-btn.active svg line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.active svg line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
 }
 
 /* Sidebar Overlay */
